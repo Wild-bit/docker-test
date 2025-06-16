@@ -3,8 +3,15 @@
 
 
 ## 启动
-```
+```bash 
+# 后台启动服务（自动构建镜像，只在必要时）
 docker-compose up -d
+
+ # 强制重新构建所有镜像，然后启动服务（前台运行）
+docker-compose up --build
+
+# 强制重新构建 + 后台运行
+docker-compose up --build -d
 ```
 
 ## 目录结构
