@@ -17,6 +17,11 @@ docker-compose up --build -d
 ## 目录结构
 ```
 docker-test/
+├── docker-compose.yml
+├── Dockerfile
+├── README.md
+├── docs/        # 文档目录
+│   └── docker-command.md 
 ├── src/
 │   ├── controllers/       # 控制器层：解析请求、调用 service、返回响应
 │   │   └── user.controller.ts
