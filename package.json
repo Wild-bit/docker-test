@@ -1,0 +1,13 @@
+{
+  "name": "docker-express-demo",
+  "version": "1.0.0",
+  "description": "A simple Koa.js app with Docker",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "koa": "^2.14.2",
+    "@koa/router": "^12.0.0"
+  }
+}
