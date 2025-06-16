@@ -7,8 +7,50 @@
 docker-compose up -d
 ```
 
+## 目录结构
+```
+docker-test/
+├── src/
+│   ├── controllers/       # 控制器层：解析请求、调用 service、返回响应
+│   │   └── user.controller.ts
+│
+│   ├── services/          # 服务层：业务逻辑处理（例如注册流程、权限判断）
+│   │   └── user.service.ts
+│
+│   ├── models/            # 模型层：数据库模型、结构定义（ORM or schema）
+│   │   └── user.model.ts
+│
+│   ├── routes/            # 路由层：请求路径配置，绑定 controller
+│   │   └── user.routes.ts
+│
+│   ├── middlewares/       # 中间件层：鉴权、日志、异常处理等
+│   │   └── auth.middleware.ts
+│
+│   ├── validators/        # 校验器：请求参数校验（如 zod/joi）
+│   │   └── user.validator.ts
+│
+│   ├── utils/             # 工具函数、通用逻辑（如密码加密、token）
+│   │   └── jwt.ts
+│
+│   ├── config/            # 配置项：env、DB连接、CORS设置等
+│   │   └── database.ts
+│
+│   ├── constants/         # 常量定义，如错误码、角色定义等
+│
+│   ├── types/             # 类型定义（TS 项目）
+│
+│   ├── app.ts             # app 实例，配置中间件、路由挂载
+│   └── main.ts            # 启动文件（监听端口、调用 app）
+│
+├── .env                   # 环境变量
+├── package.json
+└── tsconfig.json
+
+```
+
 ## TODO
-- [ ] 配置 mysql
+- [x] 配置 mysql
+- [ ] 采用 推荐采用 现代分层架构，通常是基于 MCS（Model-Controller-Service）+ 其他辅助层 的结构
 
 
 ## 注意点 
