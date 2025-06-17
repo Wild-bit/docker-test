@@ -1,26 +1,27 @@
-const mysql = require("mysql2/promise");
+import mysql from 'mysql2/promise';
 
 // 创建连接池
-const pool = mysql.createPool({
-  host: process.env.DB_HOST || "localhost",
-  user: process.env.DB_USER || "root",
-  password: process.env.DB_PASSWORD || "password",
-  database: process.env.DB_NAME || "koadb",
+export const pool = mysql.createPool({
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || 'password',
+  database: process.env.DB_NAME || 'koadb',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 5,
 });
 
 // 初始化数据库，创建表
-async function initDb() {
+export async function initDb(): Promise<void> {
   let connection;
   let retries = 10; // 最多重试10次
   let connected = false;
+  
   while (retries > 0 && !connected) {
     try {
       connection = await pool.getConnection();
       connected = true;
-      console.log("Connected to MySQL database!");
+      console.log('Connected to MySQL database!');
 
       // 创建用户表
       await connection.execute(`
@@ -33,12 +34,12 @@ async function initDb() {
         )
       `);
 
-      console.log("Database tables initialized!");
+      console.log('Database tables initialized!');
     } catch (error) {
       retries--;
       console.log(`Failed to connect to MySQL. Retries left: ${retries}`);
       if (retries === 0) {
-        console.error("Database initialization error:", error);
+        console.error('Database initialization error:', error);
         throw error;
       }
       // 等待5秒后重试
@@ -50,9 +51,3 @@ async function initDb() {
     }
   }
 }
-
-// 导出连接池和初始化函数
-module.exports = {
-  pool,
-  initDb,
-};
